@@ -2,15 +2,13 @@
 {
     public  class Player
     {
-        private int Health = 100;
 
-        CircleColider2D Colider = null;
-        public int health { get => Health; set => Health = value; }
-        public CircleColider2D colider { get => Colider; }
+      private  CircleColider2D _colider = null;
+        
+        public int Health { get; set; } = 100;
+        
+        public CircleColider2D Colider => _colider;
 
-        public void IniColider (CircleColider2D c)
-        {
-            Colider = c;
-        }
+        public void IniColider (CircleColider2D colider) => _colider = colider;
     }
 }
