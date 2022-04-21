@@ -3,7 +3,7 @@
     public  class Player
     {
 
-      private  CircleColider2D _colider = null;
+        private  CircleColider2D _colider = null;
         
         public int Health { get; set; } = 100;
         
