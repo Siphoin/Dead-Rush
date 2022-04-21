@@ -1,6 +1,6 @@
 ﻿namespace Dead_Rush.scripts
 {
-    public   class PhysicsColider
+    public abstract class PhysicsColider
     {
         protected bool staticBody;
     }
