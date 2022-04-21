@@ -40,16 +40,14 @@ namespace Dead_Rush.scripts
 
         }
 
-        public void Log ()
-        {
-            Debug.WriteLine("X: " + x + " Y: " + y);
-        }
 
         public void Dispose()
         {
             this.x = 0;
             this.y = 0;
         }
+        
+        public void Log () => Debug.WriteLine("X: " + x + " Y: " + y);
     }
     }
 
