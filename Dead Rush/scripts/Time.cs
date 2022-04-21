@@ -9,30 +9,36 @@ namespace Dead_Rush.scripts
 {
   public static  class Time
     {
-        static Timer timer = null;
+      private  static Timer _timer = null;
 
-    static    DateTime time1 = DateTime.Now;
-    static    DateTime time2 = DateTime.Now;
+      private  static float delta = 0;
+    
+      public static float DeltaTime => delta;
+    
+    private static DateTime[] times = {
+    DateTime.Now,
+    DateTime.Now
+    
+    };
 
-        static float delta = 0;
 
-
-        static Time ()
+       private static Time ()
         {
-            timer = new Timer();
-            timer.Interval = 1;
-            timer.Tick += GetDelta;
-            timer.Start();
+            _timer = new Timer();
+         
+            _timer.Interval = 1;
+            _timer.Tick += GetDelta;
+            _timer.Start();
         }
 
-        public static float deltaTime { get => delta; }
+        
 
         private static void GetDelta(object sender, EventArgs e)
         {
-            time2 = DateTime.Now;
-            delta = (time2.Ticks - time1.Ticks) / 10000000f;
-            Console.WriteLine(time2.Ticks - time1.Ticks); // *int* output {2493331}
-            time1 = time2;
+            times[1] = DateTime.Now;
+            delta = (times[1].Ticks - times[0].Ticks) / 10000000f;
+            Console.WriteLine(times[1].Ticks - times[0].Ticks);
+            times[0] = times[1];
         }
     }
 
