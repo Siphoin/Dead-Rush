@@ -6,48 +6,51 @@ namespace Dead_Rush.scripts
 {
     public class Bullet : IDisposable
     {
-        PictureBox pictureBox;
-        Timer timer;
-        Form f;
-        CircleColider2D Colider;
+       private PictureBox _pictureBox;
+       private Timer _timer;
+       private Form _form;
+       private CircleColider2D _colider;
+       
+      public CircleColider2D Colider => _colider;
+       
       public  Bullet(PictureBox picture, Form form, CircleColider2D c)
         {
-            Colider = c;
-            f = form;
-            pictureBox = picture;
-             timer = new Timer();
-            timer.Interval = 1;
-            timer.Tick += Move;
-            timer.Start();
+            _colider = _form;
+            _form = _form;
+            _pictureBox = picture;
+             _timer = new Timer();
+            _timer.Interval = 1;
+            _timer.Tick += Move;
+            _timer.Start();
         }
 
-        public CircleColider2D colider { get => Colider; }
 
         public void Dispose()
         {
-            f.Controls.Remove(pictureBox);
-            timer.Stop();
-            timer.Dispose();
-            pictureBox.Dispose();
-            Colider.Dispose();
+            _form.Controls.Remove(_pictureBox);
+            _timer.Stop();
+            _timer.Dispose();
+            _pictureBox.Dispose();
+            _colider.Dispose();
         }
 
         private void Move(object sender, EventArgs e)
         {
-            Vector2 vec = Vector2.zero;
-            vec = new Vector2(pictureBox.Location);
-            vec.x += 6;
-            pictureBox.Location = vec.ConvertToPoint();
+            Vector2 vector = Vector2.zero;
+            vector = new Vector2(pictureBox.Location);
+            vector.x += 6;
+            _pictureBox.Location = vector.ConvertToPoint();
 
             for (int i = 0; i < GameEngine.Zombies.Count; i++)
             {
                 if (!GameEngine.Zombies[i].destroyed)
                 {
-                bool col = GameEngine.CheckCollision(Colider, GameEngine.Zombies[i].colider);
-                    if (col)
+                bool collision = GameEngine.CheckCollision(Colider, GameEngine.Zombies[i].colider);
+                
+                    if (collision)
                     {
                         GameEngine.Zombies[i].Destroy();
-                        timer.Stop();
+                        _timer.Stop();
                         Dispose();
                     }
 
@@ -55,8 +58,9 @@ namespace Dead_Rush.scripts
                 }
                
             }
-        //    vec.Log();
-            if (vec.x > 800)
+            
+            
+            if (vector.x > 800)
             {
                 Debug.WriteLine("bullet dispose");
                 Dispose();
